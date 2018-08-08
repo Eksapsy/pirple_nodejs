@@ -14,4 +14,4 @@ The target is to make a NodeJS full API without having a single **NPM Package** 
 
 You can find my assignments in numerical order in the folders of this Git Repository.
 
-- **Assignment #1** [ link ]
+- **Assignment #1** [ https://github.com/Eksapsy/pirple_nodejs/tree/master/assignment_1 ]
