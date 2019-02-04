@@ -14,7 +14,7 @@ let lib = {};
  * @param {string} userId The user's id that we want to access the cart from
  * @param {string} itemId The item's id we want to add to the cart
  * @param {number} amount The amount of the item specified we want to add to the cart
- * @param {function} callback Callback function
+ * @param {function} callback Callback function `func()`
  */
 lib.addItem = function(userId, itemId, amount, callback) {
 
@@ -25,7 +25,7 @@ lib.addItem = function(userId, itemId, amount, callback) {
  * @param {string} userId The user's id that we want to access the cart from
  * @param {string} itemId The item's id we want to remove from the cart
  * @param {number} amount The amount of the item specified we want to remove from the cart
- * @param {function} callback Callback function
+ * @param {function} callback Callback function `func()`
  */
 lib.removeItem = function(userId, itemId, amount, callback) {
   
@@ -35,7 +35,7 @@ lib.removeItem = function(userId, itemId, amount, callback) {
 /**
  * Finishes order by emailing a receipt to the user and removing the items from the cart
  * @param {string} userId The user's id to finish the order for
- * @param {function} callback Callback function
+ * @param {function} callback Callback function `func()`
  */
 lib.commitOrder = function(userId, callback) {
 

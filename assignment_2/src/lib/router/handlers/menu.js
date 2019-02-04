@@ -1,35 +1,12 @@
 // Dependencies
+const handler = require('../handler');
 const Menu = require('../../models/Menu');
 
-// Handler
-const handler = function(data, callback) {
-  if(data.method === 'get') {
-    handler._get(data, (httpCode, res) => {
-      callback(httpCode, res);
-    })
-  } 
-  else if (data.method === 'post') {
-    handler._post(data, (httpCode, res) => {
-      callback(httpCode, res);
-    });
-  } else if (data.method === 'put') {
-    handler._put(data, (httpCode, res) => {
-      callback(httpCode, res);
-    });
-  }
-  else {
-    callback(404, {error: {httpCode: 404, title: `${data.method.toUpperCase()} is not supported for this request`}});
-  }
-};
-
+// Handler Methods
 handler._get = function(data, callback) {
   Menu.readMenu((err, menu) => {
     if(!err) {
-      if(menu) {
-        callback(200, menu);
-      } else {
-        callback(200, {menu: 'Empty or menu data file does not exist.'});
-      }
+      callback(200, {data: {menu}});
     } else {
       callback(500, {error: {httpCode: 500, title: 'A Menu data file probably does not exist', detail: err}});
     }
@@ -37,7 +14,7 @@ handler._get = function(data, callback) {
 };
 
 handler._post = function(data, callback) {
-  // Type Checking
+  // Type checking
   const name = typeof(data.payload.name) === 'string' ? data.payload.name : '';
   const description = typeof(data.payload.description) === 'string' ? data.payload.description : '';
   const cost = typeof(data.payload.cost) === 'number' && data.payload.cost > 0 ? data.payload.cost : 0;
@@ -56,7 +33,7 @@ handler._post = function(data, callback) {
 };
 
 handler._put = function(data, callback) {
-  // Type Checking
+  // Type checking
   const id = typeof(data.payload.id) === 'number' || typeof(data.payload.id) === 'string' ? data.payload.id : '';
   const name = typeof(data.payload.name) === 'string' ? data.payload.name : '';
   const description = typeof(data.payload.description) === 'string' ? data.payload.description : '';

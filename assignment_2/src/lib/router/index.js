@@ -11,12 +11,12 @@
 const router_menu     = require('./handlers/menu');
 const router_ping     = require('./handlers/ping');
 const router_notFound = require('./handlers/notFound');
+const router_users    = require('./handlers/users');
+// const router_cart     = require('./handlers/cart');
+// const router_token    = require('./handlers/token');
 
 // Library Container
-let lib = {
-  helpers: {},
-  handlers: {}
-};
+let lib = {};
 
 /**
  * All the application routes
@@ -24,6 +24,9 @@ let lib = {
 lib.routes = {
   'menu'      : router_menu,
   'ping'      : router_ping,
+  'users'     : router_users,
+  // 'cart'      : router_cart,
+  // 'token'     : router_token,
   'not-found' : router_notFound
 };
 

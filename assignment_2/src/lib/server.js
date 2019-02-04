@@ -33,8 +33,8 @@ server.httpServer = http.createServer((req, res) => {
  * 
  */
 server.httpsServerOptions = {
-  'key'  : fs.readFileSync(path.resolve('./https/key.pem')),
-  'cert' : fs.readFileSync(path.resolve('./https/cert.pem'))
+  'key'  : fs.readFileSync(path.join(__dirname + '/../../https/key.pem')),
+  'cert' : fs.readFileSync(path.join(__dirname + '/../../https/cert.pem'))
 };
 
 /**
@@ -54,7 +54,7 @@ server.unifiedServer = function(req, res) {
   const parsedUrl = new url.parse(req.url, true);
 
   // Get the query string as an object
-  const queryStringObject = parsedUrl.query;
+  const queryStringObject = {...parsedUrl.query};
 
   // Get the path
   const path = parsedUrl.pathname;
@@ -83,7 +83,7 @@ server.unifiedServer = function(req, res) {
     // Construct the data object to send to the handler
     const data = {
       'trimmedPath'       : trimmedPath,
-      'queryStringObject' : queryStringObject,
+      'queries' : queryStringObject,
       'method'            : method,
       'headers'           : headers,
       'payload'           : helpers.parseJsonToObject(buffer)

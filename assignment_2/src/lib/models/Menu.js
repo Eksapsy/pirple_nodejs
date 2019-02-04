@@ -19,7 +19,7 @@ lib.menuDest = path.join(__dirname, '../../../.data/menu.json');
  * Creates a new menu item and stores it
  * @param {string} name The name of the new item
  * @param {number} cost The cost of the item
- * @param {function} callback Callback function
+ * @param {function} callback Callback function `func(err, newItem)`
  */
 lib.createItem = function(name, description, cost, callback) {
   lib.readMenu((err, menu) => {
@@ -63,7 +63,7 @@ lib.createItem = function(name, description, cost, callback) {
  * Updates an item from the menu with the specified new values, if any
  * @param {string} id The id of the item
  * @param {{name: string, description: string, cost: number}} updatedFields Contains the fields to update
- * @param {function} callback Callback function
+ * @param {function} callback Callback function `func(err, updatedItem)`
  */
 lib.updateItem = function(id, updatedFields, callback) {
   if(typeof(id) === 'number') {
@@ -106,7 +106,7 @@ lib.updateItem = function(id, updatedFields, callback) {
 /**
  * Removes an item from the menu
  * @param {string} id The id of the item to remove
- * @param {function} callback Callback function
+ * @param {function} callback Callback function `func(err)`
  */
 lib.removeItem = function(id, callback) {
   lib.readMenu((err, menu) => {
@@ -133,7 +133,7 @@ lib.removeItem = function(id, callback) {
 /**
  * Returns the information about a menu item
  * @param {string} id The id of the menu item
- * @param {function} callback Callback function
+ * @param {function} callback Callback function `func(err, item)`
  */
 lib.getItem = function(id, callback) {
   lib.readMenu((err, menu) => {
@@ -152,7 +152,7 @@ lib.getItem = function(id, callback) {
 
 /**
  * Returns at the callback the current menu
- * @param {function} callback Callback function
+ * @param {function} callback Callback function `func(err, menu)`
  */
 lib.readMenu = function(callback) {
   const menu = require(lib.menuDest);
@@ -166,7 +166,7 @@ lib.readMenu = function(callback) {
 /**
  * Overwrittes the old menu with a new one
  * @param {object} newMenu The new menu to write
- * @param {function} callback Callback function
+ * @param {function} callback Callback function `func(err)`
  */
 lib.rewriteMenu = function(newMenu, callback) {
   fs.open(lib.menuDest, 'w+', (err, fd) => {
